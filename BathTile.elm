@@ -22,4 +22,4 @@ stackForms' xs = if xs == []
                  then []
                  else head xs :: map (move (0,10)) (tail xs)
 
-main = collage 300 300 [stackForms (map rowToForm boxData)]
+main = collage 300 300 [filled black (rect 12 12), stackForms (map rowToForm boxData)]
