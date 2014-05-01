@@ -8,7 +8,9 @@ registerColor n = case n of
                     2 -> red
                     3 -> yellow
 
-boxData = [[1,2,3,1,1,2,1,2,3],[3,2,1,2,3,2,1,2,3]]
+boxData = [[1,2,3,1,1,2,1,2,3],
+           [3,2,1,2,3,2,1,2,3],
+           [3,2,1,3,2,1,3,2,1]]
 
 rowToForm = group . rowToForm'
 
@@ -23,7 +25,7 @@ stackForms = group . stackForms'
 
 stackForms' xs = if xs == []
                  then []
-                 else head xs :: map (move (0,10)) (tail xs)
+                 else head xs :: map (move (0,10)) (stackForms' <| tail xs)
 
 plotData input = [move input <| filled black (rect 12 12), 
                   stackForms (map rowToForm boxData)]
