@@ -18,7 +18,7 @@ rowToForm = group . rowToForm'
 rowToForm' : [Int] -> [Form]
 rowToForm' xs = if xs == []
                   then []
-                  else (filled (registerColor (head xs)) (rect 8 8)) :: (map (move (10,0)) (rowToForm' (tail xs)))
+                  else (filled (registerColor (head xs)) (rect 10 10)) :: (map (move (10,0)) (rowToForm' (tail xs)))
 
 stackForms : [Form] -> Form
 stackForms = group . stackForms'
@@ -30,7 +30,7 @@ stackForms' xs = if xs == []
 plotData input = [move input <| filled black (rect 12 12), 
                   stackForms (map rowToForm boxData)]
 
-main = lift (collage 300 300 . plotData) positionAutomaton
+main = lift (collage 300 300 . map (move (-100, 100)) . plotData) positionAutomaton
 
 
 arrowToPosition : {a | x : Int, y : Int} -> (Float,Float) -> (Float,Float)
